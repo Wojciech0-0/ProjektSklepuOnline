@@ -1,0 +1,14 @@
+.kolorowy{
+    background-image: linear-gradient(
+        to right,
+        #3250D3 0%,
+        #4B53DB 20%,
+        #7B6BF3 60%,
+        #BC84F5 100%
+    );
+
+    color: transparent;
+
+    -webkit-background-clip: text;      
+    background-clip: text;
+}

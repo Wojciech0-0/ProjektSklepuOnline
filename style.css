@@ -12,3 +12,8 @@
     -webkit-background-clip: text;      
     background-clip: text;
 }
+
+.inpat{
+    background-color: rgb(101, 100, 100);
+    border: 0px;
+}

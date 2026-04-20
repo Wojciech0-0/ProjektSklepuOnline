@@ -8,24 +8,26 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body style="height: 100vh; display: flex; flex-direction: column;">
-    <header class="text-center row">
-        <div class="col-2 col-md-5">
-            <img id="menuicon" class="menuicon col-12 col-sm-9 col-md-3 col-lg-1" src="Ikony/menu.png" alt="" style="float: left;">
-        </div>
-        <input type="text" class="px-3 wyszukiwanie rounded-5 border-0 col-8 col-md-3 h-100">
+    <header class="row d-flex flex-column align-items-center container-fluid">
         <div class="col-2 col-md-4">
-            <a href="konto.html"><img id="accicon" class="accicon col-7 col-sm-5 col-md-2 col-lg-1" src="Ikony/konto.png" alt="" style="float: right;"></a>
+            <img id="menuicon" class="menuicon img-fluid col-md-3 col-xl-2 powieksz" src="Ikony/menu.png" alt="" style="float: left;">
+        </div>
+        <input type="text" class="wyszukiwanie rounded-5 border-0 col-7 col-md-3 h-75">
+        <div class="col-2 col-md-4 col-lg-3 d-flex pt-2">
+            <div class="col-md-6 col-lg-10"></div>
+            <a href="koszyk.html" class="col-8 col-md-2 col-lg-2 col-xl-1 powieksz"><img src="Ikony/koszyk2.png" alt="" class="img-fluid"></a>
+            <a href="konto.html" class="col-8 col-md-2 col-lg-2 col-xl-1 powieksz"><img id="accicon" class="accicon img-fluid" src="Ikony/konto.png" alt="" ></a>
         </div>
     </header>
-    <div style="display: flex;">
+    <div style="display: flex;" class="h-100">
         <aside class="kategorie col-3">
             <div class="p-3">
                 <h2 class="kolorowy">Kategorie:</h2>
-                <ul>
+                <ul class="lista">
                     <li>Wszystkie przedmioty <img class="ikonki" src="Ikony/Wszystko.png" alt=""></li>
                     <li>Opakowania <img class="ikonki" src="Ikony/opakowania.png" alt=""></li>
                     <li>Folie i zabezpieczenia <img class="ikonki" src="Ikony/Folie.png" alt=""></li>
-                    <li>Erykiety <img class="ikonki" src="Ikony/Etykiety.png" alt=""></li>
+                    <li>Etykiety <img class="ikonki" src="Ikony/Etykiety.png" alt=""></li>
                     <li>Sprzęt <img class="ikonki" src="Ikony/Narzedzia.png" alt=""></li>
                 </ul>
             </div>
@@ -44,7 +46,18 @@
             </div>
         </aside>
         <main class="homepage col-12 col-md-9 overflow-y-scroll">
-            <div class="col-7 m-3 py-1 px-3 rounded-4 text-center text-light" style="background-color: darkgray;"><h1 id="Napis">Wszystkie przedmioty</h1></div>
+            <div class="Digga col-7 m-3 py-1 px-3 rounded-4 text-center text-light" style="background-color: rgba(169, 169, 169, 0.41);"><h1 id="Napis">Wszystkie przedmioty</h1></div>
+            <div class="">
+                    <div class="rounded-4 d-flex flex-column m-4 col-6 col-sm-4 col-md-3 produkt powieksz" style="background-color: #d9d9d96a;">
+                        <a href="produkt.html" class="text-decoration-none text-dark">
+                            <div><img class="img-fluid" src="Zdjecia/Skaner.png" alt=""></div>
+                    <div class="podtekst rounded-4 p-3 text-center" style="background-color: #c2dcff7b;">Skaner <br> <br> 450zł</div>
+                        </a>
+                    
+            </div>
+
+            </div>
+            
         </main>
     </div>
     

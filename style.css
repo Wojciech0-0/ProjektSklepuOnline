@@ -31,8 +31,12 @@ th, td{
 header, footer{
     width: 100%;
     height: 50px;
-    padding: 10px;
     background-image: linear-gradient(to right,#000, #fff);
+    padding: 5px;
+}
+
+header{
+    height: 60px;
 }
 
 .homepage{
@@ -48,4 +52,33 @@ header, footer{
     .kategorie{
         display: none;
     }
+
+    .homepage{
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .Digga{
+        height: fit-content;
+    }
+}
+
+.powieksz{
+    transition: transform 0.5s ease, box-shadow 0.3s ease; /* Płynność animacji */
+    cursor: pointer; /* Zmienia kursor na rączkę */
+}
+
+.powieksz:hover{
+    transform: scale(1.10); /* Powiększenie o 5% */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Opcjonalnie: dodaje cień, by dać efekt 3D */
+    z-index: 10; /* Gwarantuje, że powiększony produkt będzie "nad" innymi */
+}
+
+.lista li:hover{
+    font-size: larger;
+    cursor: pointer;
+}
+
+.okienko{
+    width: 270px;
 }

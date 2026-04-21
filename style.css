@@ -55,7 +55,6 @@ header{
 
     .homepage{
         justify-content: center;
-        display: flex;
         flex-wrap: wrap;
     }
     .Digga{
@@ -81,4 +80,10 @@ header{
 
 .okienko{
     width: 270px;
+}
+
+.zaznaczony{
+    text-decoration: underline;
+    font-weight: bolder;
+    font-size: larger;
 }

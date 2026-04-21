@@ -47,12 +47,7 @@ header{
 .kategorie{
     background-image: linear-gradient(to bottom, white, black);
 }
-
-@media  (max-width: 670px) {
-    .kategorie{
-        display: none;
-    }
-
+@media  (max-width: 782px) {
     .homepage{
         justify-content: center;
         flex-wrap: wrap;
@@ -86,4 +81,10 @@ header{
     text-decoration: underline;
     font-weight: bolder;
     font-size: larger;
+}
+.schowany{
+    display: none;
+}
+.pokazany{
+    display:block;
 }

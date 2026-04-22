@@ -93,7 +93,19 @@
                         <a style="color: white;" class="powieksz" href="logowanie.php">Zaloguj się</a>
                     </p>
                     <p class="col-12 col-lg-4">
-                        <a style="color: white;" class="powieksz" href="main.php?login=gosc">Kontynuuj jako gość</a>
+                        <a style="color: white;" class="powieksz" id="goscbtn">Kontynuuj jako gość</a>
+                        <script>
+                            const goscbtn = document.getElementById('goscbtn');
+
+                            goscbtn.addEventListener('click',()=>{
+                                fetch('gosc.php',{
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                                }).then(()=>{
+                                    window.location.href = 'main.php';
+                                });
+                            });
+                        </script>
                     </p>
                 </div>
             </div>

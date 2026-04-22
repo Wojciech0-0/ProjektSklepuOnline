@@ -1,4 +1,5 @@
 <?php
+session_start();
 $db = mysqli_connect('localhost', 'root', '', 'sklep');
 
 // Krótszy zapis sprawdzania POST
@@ -17,7 +18,8 @@ $wynik = mysqli_query($db, $sql);
 if (mysqli_num_rows($wynik) > 0) {
     $uzytkownik = mysqli_fetch_assoc($wynik);
     // Zamiast header, wysyłamy samo ID
-    echo "SUCCESS:" . $uzytkownik['id_uzytkownika'];
+    $_SESSION['zalogowany_id'] = $uzytkownik['id_uzytkownika'];
+    echo "SUCCESS:";
 } else {
     echo "Nieprawidłowe dane logowania!";
 }

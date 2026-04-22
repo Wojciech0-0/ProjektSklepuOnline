@@ -1,11 +1,13 @@
 <?php
+session_start();
+
     $id = mysqli_connect('localhost','root','','sklep');
 
     $kategoria = $_POST['kategoria'] ?? 'wszystko';
                 $sort = $_POST['val'] ?? 'afabet';
                 $cenaOd = $_POST['cenaOd'] ?? 0;
                 $cenaDo = $_POST['cenaDo'] ?? 9999;
-                $status = $_POST['status'] ?? 'gosc';
+                $status = $_SESSION['zalogowany_id'] ?? 'gosc';
                 $szukanie = $_POST['szukanie'] ?? '';
     if($kategoria == 'wszystko'){
                 if($sort == "odNajmniejszej"){

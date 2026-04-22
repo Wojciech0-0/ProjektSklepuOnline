@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <?php
+session_start();
+if (!isset($_SESSION['zalogowany_id'])) {
+    // Jeśli nie ma go w schowku, wykopujemy go do logowania
+    header("Location: logowanie.php");
+    exit;
+}
 $db = mysqli_connect('localhost','root','','sklep');
 
 $id_produktu = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -16,17 +22,17 @@ $zapytanie = "SELECT produkty.nazwa, produkty.cena, produkty.zdjecie, produkty.o
 $wynik = mysqli_query($db, $zapytanie);
 $produkt = mysqli_fetch_assoc($wynik);
 
-$status = isset($_GET['status']) ? $_GET['status'] : 'gosc';
+$status = $_SESSION['zalogowany_id'];
 ?>
 <body style="height: 100vh; display: flex; flex-direction: column;">
     <header class="row text-center h-">
         <div class="col-2 col-md-5">
-            <a href="main.php?login=<?php echo $status?>"><img id="menuicon" class="menuicon col-12 col-sm-6 col-md-2 col-lg-1" src="Ikony/home.png" alt="" style="float: left;"></a>
+            <a href="main.php"><img id="menuicon" class="menuicon col-12 col-sm-6 col-md-2 col-lg-1" src="Ikony/home.png" alt="" style="float: left;"></a>
         </div>
         <div class="px-3  col-8 col-md-3"></div>
         <div class="col-2 col-md-4">
-            <a href="konto.php?status=<?php echo $status;?>"><img id="accicon" class="accicon col-6 col-sm-5 col-md-2 col-lg-1" src="Ikony/konto.png" alt="" style="float: right;"></a>
-            <a href="koszyk.php?<?php echo $status;?>"><img src="Ikony/koszyk2.png" alt="" class="col-6 col-sm-5 col-md-2 col-lg-1" style="float: right;"></a>
+            <a href="konto.php"><img id="accicon" class="accicon col-6 col-sm-5 col-md-2 col-lg-1" src="Ikony/konto.png" alt="" style="float: right;"></a>
+            <a href="koszyk.php"><img src="Ikony/koszyk2.png" alt="" class="col-6 col-sm-5 col-md-2 col-lg-1" style="float: right;"></a>
             
         </div>
     </header>

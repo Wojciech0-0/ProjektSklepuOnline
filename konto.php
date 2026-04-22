@@ -8,7 +8,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <?php
-$status = isset($_GET['status']) ? $_GET['status'] : 'gosc';
+session_start();
+if (!isset($_SESSION['zalogowany_id'])) {
+    // Jeśli nie ma go w schowku, wykopujemy go do logowania
+    header("Location: logowanie.php");
+    exit;
+}
+$status = $_SESSION['zalogowany_id'];
+
 
 $db = mysqli_connect('localhost','root','','sklep');
 ?>
@@ -17,7 +24,7 @@ $db = mysqli_connect('localhost','root','','sklep');
         <div class=" col-8 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
             <div class="pb-3 row text-center d-flex justify-content-center">
                 <div class="mb-5 d-flex rounded-5 col-11 align-items-center" style="background-color: rgba(104, 103, 103, 0.4);">
-                    <a href="main.php?login=<?php echo $status?>" class="col-2 col-sm-1 powieksz" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
+                    <a href="main.php" class="col-2 col-sm-1 powieksz" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
                     <div class="col-10 fs-1 text-light text-center">
                         <?php
                         if($status == 'gosc'){
@@ -41,24 +48,24 @@ $db = mysqli_connect('localhost','root','','sklep');
                     echo '
                 
                 <div class="col-lg-12 my-2">
-                    <a href="szczegoly.php?login=' . $status . ' "><input type="button" value="Szczegóły konta" name="szczegoly" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="szczegoly.php"><input type="button" value="Szczegóły konta" name="szczegoly" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
                 
 
                 <div class="col-lg-12 my-2">
-                    <a href="historiaZamowien.php?login=' . $status . ' "><input type="button" value="Historia zamówień" name="historia" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="historiaZamowien.php"><input type="button" value="Historia zamówień" name="historia" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
 
 
                 <div class="col-lg-12 my-2">
                     
-                    <a href="zmianaHasla.php?login=' . $status . ' "><input type="button" value="Zmień hasło" name="zmienhaslo" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="zmianaHasla.php"><input type="button" value="Zmień hasło" name="zmienhaslo" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
 
                 
                 <div class="col-lg-12 my-2">
                     
-                    <a href="logowanie.php?login=' . $status . ' "><input type="button" value="Wyloguj się" name="wyloguj" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <input type="button" value="Wyloguj się" name="wyloguj" id="wyloguj" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz">
                 </div>
                 
 
@@ -68,12 +75,25 @@ $db = mysqli_connect('localhost','root','','sklep');
                 }else{
                     echo ' <div class="col-lg-12 my-5">
                     
-                    <a href="logowanie.php"><input type="button" value="Zaloguj się" name="wyloguj" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz" style="background-color: lightgreen; color: white;"></a>
+                    <input type="button" value="Zaloguj się" name="wyloguj" id="wyloguj" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz" style="background-color: lightgreen; color: white;">
                 </div>';
                 }
                 ?>
             </div>
         </div>
     </div>
+    <script>
+        const wyloguj = document.getElementById('wyloguj');
+
+        wyloguj.addEventListener('click',()=>{
+            fetch('wyloguj.php',{
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                                })
+                                .then(()=>{
+                                    window.location.href = 'logowanie.php';
+                                });
+        })
+    </script>
 </body>
 </html>

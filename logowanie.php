@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <?php
+session_start();
 $db = mysqli_connect('localhost','root','','sklep');
 
 $sql = "SELECT * From uzytkownicy";
@@ -76,8 +77,7 @@ $uzytkownicy = mysqli_fetch_array($wynik);
                             .then(res => res.text())
                             .then(data => {
                                 if (data.startsWith("SUCCESS:")) {
-                                    const id = data.split(":")[1];
-                                    window.location.href = 'main.php?login=' + id;
+                                    window.location.href = 'main.php;
                                 } else {
                                     alert.classList.remove('d-none');
                                     alert.innerHTML = data;
@@ -92,7 +92,20 @@ $uzytkownicy = mysqli_fetch_array($wynik);
                         <a class="powieksz" style="color: white;" href="rejestracja.php">Zarejestruj się</a>
                     </p>
                     <p class="col-12 col-lg-4">
-                        <a class="powieksz" style="color: white;" href="main.php?login=gosc">Kontynuuj jako gość</a>
+                        <a style="color: white;" class="powieksz" id="goscbtn">Kontynuuj jako gość</a>
+                        <script>
+                            const goscbtn = document.getElementById('goscbtn');
+
+                            goscbtn.addEventListener('click',()=>{
+                                fetch('gosc.php',{
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                                })
+                                .then(()=>{
+                                    window.location.href = 'main.php';
+                                });
+                            });
+                        </script>
                     </p>
                 </div>
             </div>

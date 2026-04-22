@@ -7,6 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+<?php
+session_start();
+if (!isset($_SESSION['zalogowany_id'])) {
+    // Jeśli nie ma go w schowku, wykopujemy go do logowania
+    header("Location: logowanie.php");
+    exit;
+}
+?>
 <body style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png); background-size: cover; background-repeat: repeat-y;">
 
     <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">

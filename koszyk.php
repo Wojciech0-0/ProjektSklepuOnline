@@ -8,7 +8,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <?php
-$status = isset($_GET['status']) ? $_GET['status'] : 'gosc';
+session_start();
+if (!isset($_SESSION['zalogowany_id'])) {
+    // Jeśli nie ma go w schowku, wykopujemy go do logowania
+    header("Location: logowanie.php");
+    exit;
+}
+$status = $_SESSION['zalogowany_id'];
+
 ?>
 <body style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png); background-size: cover; background-repeat: no-repeat;">
 
@@ -19,7 +26,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : 'gosc';
             <div class="pb-3 row text-center d-flex justify-content-center align-items-center">
 
                 <div class="mb-5 d-flex rounded-5 col-11 align-items-center" style="background-color: rgba(104, 103, 103, 0.4);">
-                    <a href="main.html" class="col-2 col-sm-1 powieksz" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
+                    <a href="main.php" class="col-2 col-sm-1 powieksz" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
                     <div class="col-10 fs-1 text-light text-center">
                         Twój koszyk
                     </div>

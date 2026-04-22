@@ -8,7 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <?php
-    $status = isset($_GET['login']) ? $_GET['login'] : 'gosc';
+session_start();
+if (!isset($_SESSION['zalogowany_id'])) {
+    // Jeśli nie ma go w schowku, wykopujemy go do logowania
+    header("Location: logowanie.php");
+    exit;
+}
+    $status = $_SESSION['zalogowany_id'];
 ?>
 <script>
     fetch('wyswietl.php', {
@@ -26,8 +32,8 @@
         </div>
         <input type="text" placeholder="Wyszukaj" class="px-3 wyszukiwanie rounded-5 border-0 col-8 col-md-3 h-100" id="wyszukiwarka">
         <div class="col-2 col-md-4">
-            <a href="konto.php?status=<?php echo $status?>"><img id="accicon" class="accicon col-6 col-sm-5 col-md-2 col-lg-1" src="Ikony/konto.png" alt="" style="float: right;"></a>
-            <a href="koszyk.html"><img src="Ikony/koszyk2.png" alt="" class="col-6 col-sm-5 col-md-2 col-lg-1" style="float: right;"></a>
+            <a href="konto.php"><img id="accicon" class="accicon col-6 col-sm-5 col-md-2 col-lg-1" src="Ikony/konto.png" alt="" style="float: right;"></a>
+            <a href="koszyk.php"><img src="Ikony/koszyk2.png" alt="" class="col-6 col-sm-5 col-md-2 col-lg-1" style="float: right;"></a>
             
         </div>
     </header>

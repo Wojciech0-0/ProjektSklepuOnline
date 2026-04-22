@@ -1,11 +1,11 @@
 <?php
-
+session_start()
 $db = mysqli_connect('localhost','root','','sklep');
 
-$status = $_POST['status'];
-$stareHaslo = $_POST['stareHaslo'];
-$noweHaslo1 = $_POST['noweHaslo1'];
-$noweHaslo2 = $_POST['noweHaslo2'];
+$status = $_SESSION['zalogowany_id'];
+$stareHaslo = mysqli_real_escape_string($_POST['stareHaslo']);
+$noweHaslo1 = mysqli_real_escape_string($_POST['noweHaslo1']);
+$noweHaslo2 = mysqli_real_escape_string($_POST['noweHaslo2']);
 
 $wynik = mysqli_query($db,"SELECT uzytkownicy.haslo FROM uzytkownicy WHERE uzytkownicy.id_uzytkownika = $status");
 

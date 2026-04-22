@@ -16,7 +16,7 @@
                             .then(data => {
                                 document.getElementById('produktyS').innerHTML = data;});
 </script>
-<body style="height: 100vh; display: flex; flex-direction: column;">
+<body style="height: 100vh; display: flex; flex-direction: column; overflow-x: hidden;">
     <header class="row text-center h-">
         <div class="col-2 col-md-5">
             <img class="menuicon col-12 col-sm-6 col-md-2 col-lg-1 powieksz" id="menu" src="Ikony/menu.png" alt="" style="float: left;">
@@ -56,7 +56,9 @@
                 
             </div>
         </aside>
-        <main class="homepage col-12 col-md-9 overflow-y-auto h-100 overflow-x-hidden">
+        <main class="homepage col-12 col-md-9 overflow-y-auto h-100 overflow-x-hidden" style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png);
+    background-repeat: no-repeat;
+    background-size: cover;">
             <div class="Digga col-7 m-3 py-1 px-3 rounded-4 text-center text-light" style="background-color: rgba(169, 169, 169, 0.41);"><h1 id="Napis">Wszystkie przedmioty</h1></div>
             <div id="produktyS" class="row">
                     <div class="rounded-4 d-flex flex-column m-4 col-6 col-sm-4 col-md-3 produkt powieksz" style="background-color: #d9d9d96a;">
@@ -77,16 +79,10 @@
         const elementy = document.querySelectorAll('.lista li');
         const menu = document.getElementById('menu');
         const kategorie = document.getElementById('kategorie');
-        const mediaQeaty = window.matchMedia('(max-width: 782px)');
+        const mediaQeaty = window.matchMedia('(max-width: 727px)');
+        const produkty = document.querySelectorAll('produkt');
+        const homepage = document.querySelector('homepage');
 
-            let schowane;
-            function sprawdzSchowanie(){
-                if(kategorie.style.display == 'none'){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
         
             mediaQeaty.addEventListener('change',(e)=>{
                 if(e.matches){
@@ -99,13 +95,13 @@
             });
 
         menu.addEventListener('click',()=>{
-            if(sprawdzSchowanie() == true){
-                    kategorie.classList.remove('pokazany');
-                    kategorie.classList.add('schowany');
-                }else{
-                    kategorie.classList.remove('schowany');
-                    kategorie.classList.add('pokazany');
-                }
+           if(window.innerWidth < 782 && kategorie.classList.contains('schowany')){
+            kategorie.classList.remove('schowany');
+            kategorie.classList.add('pokazany');
+           }else if(window.innerWidth < 782 && kategorie.classList.contains('pokazany')){
+            kategorie.classList.remove('pokazany');
+            kategorie.classList.add('schowany');
+           }
         });
 
         let globalCenado = 99999;

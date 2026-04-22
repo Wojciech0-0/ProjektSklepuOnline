@@ -41,7 +41,8 @@ header{
 
 .homepage{
     background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png);
-    background-repeat: repeat-y;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .kategorie{
@@ -50,6 +51,7 @@ header{
 @media  (max-width: 782px) {
     .homepage{
         justify-content: center;
+        align-items: center;
         flex-wrap: wrap;
     }
     .Digga{

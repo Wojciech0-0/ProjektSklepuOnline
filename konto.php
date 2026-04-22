@@ -41,24 +41,24 @@ $db = mysqli_connect('localhost','root','','sklep');
                     echo '
                 
                 <div class="col-lg-12 my-2">
-                    <a href="szczegoly.php?login=<?php echo $status?>"><input type="button" value="Szczegóły konta" name="szczegoly" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="szczegoly.php?login=' . $status . ' "><input type="button" value="Szczegóły konta" name="szczegoly" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
                 
 
                 <div class="col-lg-12 my-2">
-                    <a href="historiaZamowien.php?login=<?php echo $status?>"><input type="button" value="Historia zamówień" name="historia" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="historiaZamowien.php?login=' . $status . ' "><input type="button" value="Historia zamówień" name="historia" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
 
 
                 <div class="col-lg-12 my-2">
                     
-                    <a href="zmianaHasla.php?login=<?php echo $status?>"><input type="button" value="Zmień hasło" name="zmienhaslo" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="zmianaHasla.php?login=' . $status . ' "><input type="button" value="Zmień hasło" name="zmienhaslo" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
 
                 
                 <div class="col-lg-12 my-2">
                     
-                    <a href="logowanie.php?login=<?php echo $status?>"><input type="button" value="Wyloguj się" name="wyloguj" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="logowanie.php?login=' . $status . ' "><input type="button" value="Wyloguj się" name="wyloguj" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
                 
 

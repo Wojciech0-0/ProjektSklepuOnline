@@ -7,6 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+<?php
+    $status = $_GET['login'];
+?>
 <body style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png); background-size: cover; background-repeat: no-repeat;">
     <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
         <div class=" col-8 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
@@ -20,26 +23,57 @@
                 </div>
 
                 <div class="col-lg-12 my-2">
-                    <input type="password" placeholder="Poda stare hasło" name="starehaslo" id="" class="bg-light inpat border-1 rounded-3 col-7 col-lg-4">
+                    <input type="password" placeholder="Podaj stare hasło" name="starehaslo" id="stareHaslo" class="bg-light inpat border-1 rounded-3 col-7 col-lg-4">
                 </div>
                 
 
                 <div class="col-lg-12 my-2">
-                    <input type="password" placeholder="Podaj nowe hasło" name="nowehaslo" id="" class="bg-light inpat border-1 rounded-3 col-7 col-lg-4">
+                    <input type="password" placeholder="Podaj nowe hasło" name="nowehaslo" id="nowehaslo1" class="bg-light inpat border-1 rounded-3 col-7 col-lg-4">
                 </div>
 
 
                 <div class="col-lg-12 my-2">
                     
-                    <input type="password" placeholder="Potwierdź nowe hasło" name="potwierdznowe" id="" class="bg-light inpat border-1 rounded-3 col-7 col-lg-4">
+                    <input type="password" placeholder="Potwierdź nowe hasło" name="potwierdznowe" id="nowehaslo2" class="bg-light inpat border-1 rounded-3 col-7 col-lg-4">
                 </div>
 
-                
+                <div class="rounded-3 col-7 col-lg-4 mt-4  d-none text-bg-danger" id='alert'></div>
 
                 <div class="col-lg-12 my-5">
-                    <input type="submit" value="Zmień hasło" name="zmien" style=" color: black; background-color: greenyellow;" class="rounded-3 col-7 col-lg-4 powieksz">
+                    <input id="zmien" type="submit" value="Zmień hasło" name="zmien" style=" color: black; background-color: greenyellow;" class="rounded-3 col-7 col-lg-4 powieksz">
                 </div>
-                
+                <script>
+                    const alert = document.getElementById('alert');
+                    const zmien = document.getElementById('zmien');
+
+                    
+                    zmien.addEventListener('click',(e)=>{
+                        e.preventDefault();
+
+                        const stareHaslo = document.getElementById('stareHaslo').value;
+                        const nowehaslo1 = document.getElementById('nowehaslo1').value;
+                        const nowehaslo2 = document.getElementById('nowehaslo2').value;
+
+                        fetch('zmienHaslo.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: `status=${encodeURIComponent(<?php echo $status?>)}&stareHaslo=${encodeURIComponent(stareHaslo)}&noweHaslo1=${encodeURIComponent(nowehaslo1)}&noweHaslo2=${encodeURIComponent(nowehaslo2)}`
+                        })
+                        .then(res => res.text())
+                        .then(data => {
+                             if (data.startsWith("Hasło")) {
+                                    alert.classList.remove('d-none');
+                                    alert.classList.remove('text-bg-danger');
+                                    alert.classList.add('text-bg-success');
+                                    alert.innerHTML = data;
+                                } else {
+                                    alert.classList.remove('d-none');
+                                    alert.innerHTML = data;
+                                }
+                        });
+                        
+                    })
+                </script>
             </div>
         </div>
     </div>

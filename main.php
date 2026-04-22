@@ -24,7 +24,7 @@
         <div class="col-2 col-md-5">
             <img class="menuicon col-12 col-sm-6 col-md-2 col-lg-1 powieksz" id="menu" src="Ikony/menu.png" alt="" style="float: left;">
         </div>
-        <input type="text" class="px-3 wyszukiwanie rounded-5 border-0 col-8 col-md-3 h-100">
+        <input type="text" placeholder="Wyszukaj" class="px-3 wyszukiwanie rounded-5 border-0 col-8 col-md-3 h-100" id="wyszukiwarka">
         <div class="col-2 col-md-4">
             <a href="konto.php?status=<?php echo $status?>"><img id="accicon" class="accicon col-6 col-sm-5 col-md-2 col-lg-1" src="Ikony/konto.png" alt="" style="float: right;"></a>
             <a href="koszyk.html"><img src="Ikony/koszyk2.png" alt="" class="col-6 col-sm-5 col-md-2 col-lg-1" style="float: right;"></a>
@@ -80,7 +80,14 @@
         const produkty = document.querySelectorAll('produkt');
         const homepage = document.querySelector('homepage');
         const status = <?php echo '"'.$status.'"';?>;
+        const wszukiwarka = document.getElementById('wyszukiwarka');
 
+        let szukanie = wyszukiwarka.value;
+        wyszukiwarka.addEventListener('input',()=>{
+            szukanie = wyszukiwarka.value;
+            console.log(szukanie);
+            wywolajOdswiezanie(szukanie);
+        })
         
             mediaQeaty.addEventListener('change',(e)=>{
                 if(e.matches){
@@ -111,7 +118,7 @@
         }
 
         // Funkcja zbierająca wszystkie aktualne dane i wysyłająca fetch
-        function wywolajOdswiezanie() {
+        function wywolajOdswiezanie(szukanie) {
             const aktywnyElement = document.querySelector('.lista li.zaznaczony');
             const kategoria = aktywnyElement ? aktywnyElement.id.toLowerCase() : 'wszystko';
             const sort = pobierzSortowanie();
@@ -123,7 +130,7 @@
             fetch('wyswietl.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `kategoria=${encodeURIComponent(kategoria)}&val=${encodeURIComponent(sort)}&cenaOd=${encodeURIComponent(cOd)}&cenaDo=${encodeURIComponent(cDo)}&status=${encodeURIComponent(status)}`
+                body: `kategoria=${encodeURIComponent(kategoria)}&val=${encodeURIComponent(sort)}&cenaOd=${encodeURIComponent(cOd)}&cenaDo=${encodeURIComponent(cDo)}&status=${encodeURIComponent(status)}&szukanie=${encodeURIComponent(szukanie)}`
             })
             .then(res => res.text())
             .then(data => {
@@ -142,17 +149,17 @@
                 this.classList.add('zaznaczony');
                 
                 Napis.innerText = this.innerText;
-                wywolajOdswiezanie(); // Używamy wspólnej funkcji
+                wywolajOdswiezanie(szukanie); // Używamy wspólnej funkcji
             });
         });
 
         // Obsługa sortowania
         document.querySelectorAll('input[name="cenaSort"]').forEach(radio => {
-            radio.addEventListener('change', wywolajOdswiezanie);
+            radio.addEventListener('change', wywolajOdswiezanie(szukanie));
         });
 
         // Opcjonalnie: Załaduj produkty na start
-        window.onload = wywolajOdswiezanie;
+        window.onload = wywolajOdswiezanie(szukanie);
     </script>
 
 </body>

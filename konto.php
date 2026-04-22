@@ -9,19 +9,27 @@
 </head>
 <?php
 $status = isset($_GET['status']) ? $_GET['status'] : 'gosc';
+
+$db = mysqli_connect('localhost','root','','sklep');
 ?>
 <body style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png); background-size: cover; background-repeat: no-repeat;">
     <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
         <div class=" col-8 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
             <div class="pb-3 row text-center d-flex justify-content-center">
                 <div class="mb-5 d-flex rounded-5 col-11 align-items-center" style="background-color: rgba(104, 103, 103, 0.4);">
-                    <a href="main.php" class="col-2 col-sm-1 powieksz" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
+                    <a href="main.php?login=<?php echo $status?>" class="col-2 col-sm-1 powieksz" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
                     <div class="col-10 fs-1 text-light text-center">
                         <?php
                         if($status == 'gosc'){
                             echo 'Zaloguj się po więcej informacji.';
                         }else{
-                            
+                            $sql = "SELECT uzytkownicy.login FROM uzytkownicy WHERE uzytkownicy.id_uzytkownika = $status";
+
+                            $wynik = mysqli_query($db, $sql);
+
+                            $uzytkownik = mysqli_fetch_assoc($wynik);
+
+                            echo "Cześć " . $uzytkownik['login'] . "!";
                         }
                         ?>
                     </div>
@@ -33,24 +41,24 @@ $status = isset($_GET['status']) ? $_GET['status'] : 'gosc';
                     echo '
                 
                 <div class="col-lg-12 my-2">
-                    <a href="szczegoly.html"><input type="button" value="Szczegóły konta" name="szczegoly" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="szczegoly.php?login=<?php echo $status?>"><input type="button" value="Szczegóły konta" name="szczegoly" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
                 
 
                 <div class="col-lg-12 my-2">
-                    <a href="historiaZamowien.php"><input type="button" value="Historia zamówień" name="historia" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="historiaZamowien.php?login=<?php echo $status?>"><input type="button" value="Historia zamówień" name="historia" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
 
 
                 <div class="col-lg-12 my-2">
                     
-                    <a href="zmianaHasla.php"><input type="button" value="Zmień hasło" name="zmienhaslo" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="zmianaHasla.php?login=<?php echo $status?>"><input type="button" value="Zmień hasło" name="zmienhaslo" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
 
                 
                 <div class="col-lg-12 my-2">
                     
-                    <a href="logowanie.php"><input type="button" value="Wyloguj się" name="wyloguj" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                    <a href="logowanie.php?login=<?php echo $status?>"><input type="button" value="Wyloguj się" name="wyloguj" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
                 </div>
                 
 

@@ -6,13 +6,14 @@
                 $cenaOd = $_POST['cenaOd'] ?? 0;
                 $cenaDo = $_POST['cenaDo'] ?? 9999;
                 $status = $_POST['status'] ?? 'gosc';
+                $szukanie = $_POST['szukanie'] ?? '';
     if($kategoria == 'wszystko'){
                 if($sort == "odNajmniejszej"){
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo order by produkty.cena ASC";
+                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%' order by produkty.cena ASC";
                 }else if($sort == "odNajwiekszej"){
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo order by produkty.cena DESC";
+                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.cena DESC";
                 }else{
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo order by produkty.nazwa ASC";
+                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.nazwa ASC";
                 }
 
                 $wyswietlenie = mysqli_query($id,$sqlpokaz);
@@ -28,11 +29,11 @@
     }else{
 
                 if($sort == "odNajmniejszej"){
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.kategoria = '$kategoria' AND produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo order by produkty.cena ASC";
+                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.kategoria = '$kategoria' AND produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.cena ASC";
                 }else if($sort == "odNajwiekszej"){
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.kategoria = '$kategoria' AND produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo order by produkty.cena DESC";
+                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.kategoria = '$kategoria' AND produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.cena DESC";
                 }else{
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.kategoria = '$kategoria' AND produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo order by produkty.nazwa ASC";
+                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.kategoria = '$kategoria' AND produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.nazwa ASC";
                 }
 
                 $wyswietlenie = mysqli_query($id,$sqlpokaz);

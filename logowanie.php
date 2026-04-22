@@ -7,6 +7,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+<?php
+$db = mysqli_connect('localhost','root','','sklep');
+
+$sql = "SELECT * From uzytkownicy";
+
+$wynik = mysqli_query($db, $sql);
+
+$uzytkownicy = mysqli_fetch_array($wynik);
+?>
 <body style="background-image: url(Gemini_Generated_Image_40c6r340c6r340c6.png); background-size: cover; background-repeat: no-repeat;">
     <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
         <div class="row col-6 col-md-4 col-lg-3 rounded-5 shadow" style="background-color: rgba(169,169,169,0.4);">
@@ -14,32 +23,69 @@
                 <div class="col-12 my-3 kolorowy">
                     <h2>ZALOGUJ SIĘ</h2>
                 </div>
-                
+                <form action="logowanie.php" id="formularz" method="post">
 
                 <div class="col-12 my-2">
-                    <div>
-                        Adres e-mail: <br>
+                        <div>
+                            Login: <br>
+                        </div>
+                        <input type="text" name="login" id="login" class="inpat border-1 rounded-3">
                     </div>
-                    <input type="text" name="email" id="" class="inpat border-1 rounded-3">
-                </div>
-
-
-                <div class="col-12 my-2">
-                    <div>
-                        Hasło: <br>
+                    <div class="col-12 my-2">
+                        <div>
+                            Adres e-mail: <br>
+                        </div>
+                        <input type="text" name="email" id="email" class="inpat border-1 rounded-3">
                     </div>
-                    <input type="password" name="haslo" id="" class="inpat border-1 rounded-3">
-                </div>
-                
 
-                <div class="col-12 mt-5">
-                    <input type="submit" value="ZALOGUJ" name="zaloguj" class="powieksz" style="width: 45%; background-image: linear-gradient(
-        to right,
-        #3250D3 0%,
-        #4B53DB 20%,
-        #7B6BF3 60%,
-        #BC84F5 100%
-    ); color: white;" class="rounded-3">
+
+                    <div class="col-12 my-2">
+                        <div>
+                            Hasło: <br>
+                        </div>
+                        <input type="password" name="haslo" id="haslo" class="inpat border-1 rounded-3">
+                    </div>
+                    
+
+                    <div class="col-12 mt-5">
+                        <input type="submit" id="zaloguj" value="ZALOGUJ" name="zaloguj" class="powieksz" style="width: 45%; background-image: linear-gradient(
+                            to right,
+                            #3250D3 0%,
+                            #4B53DB 20%,
+                            #7B6BF3 60%,
+                            #BC84F5 100%
+                        ); color: white;" class="rounded-3">
+                    <div class='alert alert-danger my-2 d-none' id="alert"></div>
+                </form>
+                <script>
+                    const formularz = document.getElementById('formularz');
+                    const alert = document.getElementById('alert');
+
+                    formularz.addEventListener('submit',(e)=>{
+                        e.preventDefault();
+
+                        const login = document.getElementById('login').value;
+                        const email = document.getElementById('email').value;
+                        const haslo = document.getElementById('haslo').value;
+
+                        fetch('login.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                body: `login=${encodeURIComponent(login)}&email=${encodeURIComponent(email)}&haslo=${encodeURIComponent(haslo)}`
+                            })
+                            .then(res => res.text())
+                            .then(data => {
+                                if (data.startsWith("SUCCESS:")) {
+                                    const id = data.split(":")[1];
+                                    window.location.href = 'main.php?login=' + id;
+                                } else {
+                                    alert.classList.remove('d-none');
+                                    alert.innerHTML = data;
+                                }
+                            });
+                    });
+                </script>
+                    
                 </div>
                 <div class="justify-content-evenly row" style="color: white; font-size: smaller;">
                     <p class="col-12 col-lg-4">Nie masz konta?

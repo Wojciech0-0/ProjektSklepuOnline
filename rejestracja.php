@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarejestruj sie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-image: url(Gemini_Generated_Image_40c6r340c6r340c6.png); background-size: cover; background-repeat: no-repeat;">
+    <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
+        <div class="row col-6 col-md-4 col-lg-3 rounded-5 shadow" style="background-color: rgba(169,169,169,0.4);">
+            <div class="p-3 row text-center">
+                <div class="col-12 my-3 kolorowy">
+                    <h2>ZAREJESTRUJ SIĘ</h2>
+                </div>
+                
+                <div class="col-12 my-2">
+                    <div>
+                        Login: <br>
+                    </div>
+                    <input type="text" name="email" id="" class="inpat border-1 rounded-3">
+                </div>
+
+                <div class="col-12 my-2">
+                    <div>
+                        Adres e-mail: <br>
+                    </div>
+                    <input type="text" name="email" id="" class="inpat border-1 rounded-3">
+                </div>
+
+
+                <div class="col-12 my-2">
+                    <div>
+                        Hasło: <br>
+                    </div>
+                    <input type="password" name="haslo1" id="" class="inpat border-1 rounded-3">
+                </div>
+
+                 <div class="col-12 my-2">
+                    <div>
+                        Powtórz hasło: <br>
+                    </div>
+                    <input type="password" name="haslo2" id="" class="inpat border-1 rounded-3">
+                </div>
+                
+
+                <div class="col-12 mt-5">
+                    <input type="submit" value="ZAREJESTRUJ" name="zarejestruj" class="powieksz" style=" background-image: linear-gradient(
+        to right,
+        #3250D3 0%,
+        #4B53DB 20%,
+        #7B6BF3 60%,
+        #BC84F5 100%
+    ); color: white;" class="rounded-3 col-7 col-lg-5">
+                </div>
+                <div class="justify-content-evenly row" style="color: white; font-size: smaller;">
+                    <p class="col-12 col-lg-4">Masz już konto?
+                        <a style="color: white;" class="powieksz" href="logowanie.php">Zaloguj się</a>
+                    </p>
+                    <p class="col-12 col-lg-4">
+                        <a style="color: white;" class="powieksz" href="main.php?login=gosc">Kontynuuj jako gość</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

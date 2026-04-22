@@ -15,16 +15,18 @@ $id_produktu = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $zapytanie = "SELECT produkty.nazwa, produkty.cena, produkty.zdjecie, produkty.opis, produkty.specyfikacja FROM produkty WHERE id_produktu = $id_produktu";
 $wynik = mysqli_query($db, $zapytanie);
 $produkt = mysqli_fetch_assoc($wynik);
+
+$status = isset($_GET['status']) ? $_GET['status'] : 'gosc';
 ?>
 <body style="height: 100vh; display: flex; flex-direction: column;">
     <header class="row text-center h-">
         <div class="col-2 col-md-5">
-            <a href="main.html"><img id="menuicon" class="menuicon col-12 col-sm-6 col-md-2 col-lg-1" src="Ikony/home.png" alt="" style="float: left;"></a>
+            <a href="main.php"><img id="menuicon" class="menuicon col-12 col-sm-6 col-md-2 col-lg-1" src="Ikony/home.png" alt="" style="float: left;"></a>
         </div>
-        <input type="text" class="px-3 wyszukiwanie rounded-5 border-0 col-8 col-md-3 h-100">
+        <div class="px-3  col-8 col-md-3"></div>
         <div class="col-2 col-md-4">
-            <a href="konto.html"><img id="accicon" class="accicon col-6 col-sm-5 col-md-2 col-lg-1" src="Ikony/konto.png" alt="" style="float: right;"></a>
-            <a href="koszyk.html"><img src="Ikony/koszyk2.png" alt="" class="col-6 col-sm-5 col-md-2 col-lg-1" style="float: right;"></a>
+            <a href="konto.php?<?php echo $status;?>"><img id="accicon" class="accicon col-6 col-sm-5 col-md-2 col-lg-1" src="Ikony/konto.png" alt="" style="float: right;"></a>
+            <a href="koszyk.php?<?php echo $status;?>"><img src="Ikony/koszyk2.png" alt="" class="col-6 col-sm-5 col-md-2 col-lg-1" style="float: right;"></a>
             
         </div>
     </header>

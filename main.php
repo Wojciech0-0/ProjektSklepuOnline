@@ -91,8 +91,7 @@ if (!isset($_SESSION['zalogowany_id'])) {
         let szukanie = wyszukiwarka.value;
         wyszukiwarka.addEventListener('input',()=>{
             szukanie = wyszukiwarka.value;
-            console.log(szukanie);
-            wywolajOdswiezanie(szukanie);
+            wywolajOdswiezanie();
         })
         
             mediaQeaty.addEventListener('change',(e)=>{
@@ -124,25 +123,25 @@ if (!isset($_SESSION['zalogowany_id'])) {
         }
 
         // Funkcja zbierająca wszystkie aktualne dane i wysyłająca fetch
-        function wywolajOdswiezanie(szukanie) {
-            const aktywnyElement = document.querySelector('.lista li.zaznaczony');
-            const kategoria = aktywnyElement ? aktywnyElement.id.toLowerCase() : 'wszystko';
-            const sort = pobierzSortowanie();
+        function wywolajOdswiezanie() { // Usuwamy parametr
+    const szukaneTeraz = document.getElementById('wyszukiwarka').value; // Pobieramy na bieżąco
+    const aktywnyElement = document.querySelector('.lista li.zaznaczony');
+    const kategoria = aktywnyElement ? aktywnyElement.id.toLowerCase() : 'wszystko';
+    const sort = pobierzSortowanie();
 
-            // Pobieramy wartości bezpośrednio z inputów lub zmiennych domyślnych
-            const cOd = (cenaOd.value !== "" && cenaOd.value >= 0) ? cenaOd.value : 0;
-            const cDo = (cenaDo.value !== "" && cenaDo.value >= 0) ? cenaDo.value : 99999;
+    const cOd = (cenaOd.value !== "" && cenaOd.value >= 0) ? cenaOd.value : 0;
+    const cDo = (cenaDo.value !== "" && cenaDo.value >= 0) ? cenaDo.value : 99999;
 
-            fetch('wyswietl.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `kategoria=${encodeURIComponent(kategoria)}&val=${encodeURIComponent(sort)}&cenaOd=${encodeURIComponent(cOd)}&cenaDo=${encodeURIComponent(cDo)}&status=${encodeURIComponent(status)}&szukanie=${encodeURIComponent(szukanie)}`
-            })
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById('produktyS').innerHTML = data;
-            });
-        }
+    fetch('wyswietl.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `kategoria=${encodeURIComponent(kategoria)}&val=${encodeURIComponent(sort)}&cenaOd=${encodeURIComponent(cOd)}&cenaDo=${encodeURIComponent(cDo)}&status=${encodeURIComponent(status)}&szukanie=${encodeURIComponent(szukaneTeraz)}`
+    })
+    .then(res => res.text())
+    .then(data => {
+        document.getElementById('produktyS').innerHTML = data;
+    });
+}
 
         // Listenery dla cen
         cenaDo.addEventListener('blur', wywolajOdswiezanie);
@@ -155,14 +154,16 @@ if (!isset($_SESSION['zalogowany_id'])) {
                 this.classList.add('zaznaczony');
                 
                 Napis.innerText = this.innerText;
-                wywolajOdswiezanie(szukanie); // Używamy wspólnej funkcji
+                wywolajOdswiezanie(); // Używamy wspólnej funkcji
             });
         });
 
         // Obsługa sortowania
         document.querySelectorAll('input[name="cenaSort"]').forEach(radio => {
-            radio.addEventListener('change', wywolajOdswiezanie(szukanie));
-        });
+    radio.addEventListener('change', () => {
+        wywolajOdswiezanie(); 
+    });
+});
 
         function sprawdzRozmiar(){
             if(window.innerWidth < 782){
@@ -172,7 +173,7 @@ if (!isset($_SESSION['zalogowany_id'])) {
         }
 
         // Opcjonalnie: Załaduj produkty na start
-        window.onload = wywolajOdswiezanie(szukanie);
+        window.onload = wywolajOdswiezanie();
         window.onload = sprawdzRozmiar();
     </script>
 

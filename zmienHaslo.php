@@ -1,5 +1,10 @@
 <?php
 session_start()
+if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
+    // Jeśli nie ma go w schowku, wykopujemy go do logowania
+    header("Location: logowanie.php");
+    exit;
+}
 $db = mysqli_connect('localhost','root','','sklep');
 
 $status = $_SESSION['zalogowany_id'];

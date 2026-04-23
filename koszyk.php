@@ -101,7 +101,9 @@ $status = $_SESSION['zalogowany_id'];
             }else{
                 alert("Nie można kupić pustego koszyka!");
             }
-            window.location.href = 'koszyk.php';
+            while(!document.getElementById('alert')){
+                window.location.href = 'koszyk.php';
+            }
         })
     </script>
 </body>

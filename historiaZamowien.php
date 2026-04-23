@@ -24,7 +24,7 @@ if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
             <div class="pb-3 row text-center d-flex justify-content-center">
 
                <div class="mb-5 d-flex rounded-5 col-11 align-items-center" style="background-color: rgba(104, 103, 103, 0.4);">
-                    <a href="main.html" class="col-2 col-sm-1" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
+                    <a href="main.php" class="col-2 col-sm-1" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
                     <div class="col-10 fs-1 text-light text-center">
                        Historia zamówień
                     </div>
@@ -36,6 +36,38 @@ if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
                         <tr>
                             <th>Zamówiony towar</th><th>Cena</th><th>Data</th><th>Status</th>
                         </tr>
+                        <?php
+                        $db = mysqli_connect('localhost', 'root', '', 'sklep');
+                        $status_user = $_SESSION['zalogowany_id'];
+
+                        // SQL z grupowaniem i logiką statusu
+                        $sql = "SELECT 
+                                    GROUP_CONCAT(produkty.nazwa SEPARATOR ', ') AS lista_towarow, 
+                                    SUM(produkty.cena) AS laczna_cena, 
+                                    zakupy.data_zakupu,
+                                    -- Logika statusu: Jeśli data jest starsza niż 7 dni, to 'Dostarczono'
+                                    IF(zakupy.data_zakupu <= DATE_SUB(CURDATE(), INTERVAL 7 DAY), 'Dostarczono', 'W trakcie doręczenia') AS status_zamowienia
+                                FROM zakupy 
+                                JOIN produkty ON zakupy.id_produktu = produkty.id_produktu 
+                                WHERE zakupy.id_uzytkownika = '$status_user'
+                                GROUP BY zakupy.index_zakupu  -- Grupowanie po Twoim numerze zamówienia
+                                ORDER BY zakupy.data_zakupu DESC";
+
+                        $wynik1 = mysqli_query($db, $sql);
+
+                        if ($wynik1) {
+                            while($d = mysqli_fetch_array($wynik1)){
+                                echo '<tr>';
+                                echo '<td>' . htmlspecialchars($d['lista_towarow']) . '</td>';
+                                echo '<td>' . number_format($d['laczna_cena'], 2, '.', ' ') . ' zł</td>';
+                                echo '<td>' . $d['data_zakupu'] . '</td>';
+                                // Dodajemy mały kolor do statusu dla lepszego efektu
+                                $color = ($d['status_zamowienia'] == 'Dostarczono') ? 'text-success' : 'text-warning';
+                                echo '<td class="'.$color.' fw-bold">' . $d['status_zamowienia'] . '</td>';
+                                echo '</tr>';
+                            }
+                        }
+                        ?>
                     </table>
                 </div>
                 

@@ -164,8 +164,16 @@ if (!isset($_SESSION['zalogowany_id'])) {
             radio.addEventListener('change', wywolajOdswiezanie(szukanie));
         });
 
+        function sprawdzRozmiar(){
+            if(window.innerWidth < 782){
+                kategorie.classList.remove('pokazany');
+                kategorie.classList.add('schowany');
+            }
+        }
+
         // Opcjonalnie: Załaduj produkty na start
         window.onload = wywolajOdswiezanie(szukanie);
+        window.onload = sprawdzRozmiar();
     </script>
 
 </body>

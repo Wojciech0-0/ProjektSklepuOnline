@@ -10,7 +10,7 @@
                         if($login != '' && $email != '' && $haslo1 != '' && $haslo2 != ''){
                             
                         $sqlsprawdz = "SELECT id_uzytkownika FROM uzytkownicy 
-                        WHERE login = '$login' OR `e-mail` = '$email'";
+                        WHERE login = '$login' OR `email` = '$email'";
 
                         $wyniksprawdz = mysqli_query($db, $sqlsprawdz);
 

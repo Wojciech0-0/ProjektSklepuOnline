@@ -14,12 +14,27 @@ if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
     header("Location: logowanie.php");
     exit;
 }
+
+ $status = $_SESSION['zalogowany_id'];
+
+    $db = mysqli_connect('localhost','root','','sklep');
+
+    $sql1 = "SELECT uzytkownicy.login, uzytkownicy.email, uzytkownicy.data FROM uzytkownicy WHERE uzytkownicy.id_uzytkownika = $status";
+    $wynik1 = mysqli_query($db, $sql1);
+
+    $uzytkownik = mysqli_fetch_assoc($wynik1);
+
+    $sql2 = "SELECT COUNT(DISTINCT zakupy.index_zakupu) AS 'ilosc' FROM zakupy WHERE zakupy.id_uzytkownika = $status";
+
+    $wynik2 = mysqli_query($db, $sql2);
+
+    $zamowienia = mysqli_fetch_assoc($wynik2);
 ?>
 <body style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png); background-size: cover; background-repeat: repeat-y;">
 
     <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
 
-        <div class=" col-8 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
+        <div class=" col-12 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
 
             <div class="pb-3 row text-center justify-content-center">
 
@@ -37,34 +52,35 @@ if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
                             Login:
                         </div>
                         <div class="col-6 col-lg-7">
-                            Kamil
+                            <?php echo $uzytkownik['login'];?>
                         </div>
                         <div class="col-6 col-lg-5">
                             Adres e-mail
                         </div>
                         <div class="col-6 col-lg-7">
-                            Kamil@gmail.com
+                            <?php echo $uzytkownik['email'];?>
+
                         </div>
                         <div class="col-6 col-lg-5">
                             Data utworzenia konta:
                         </div>
                         <div class="col-6 col-lg-7">
-                            2025-01-02
+                            <?php echo $uzytkownik['data'];?>
                         </div>
                         <div class="col-6 col-lg-5">
                             Ilość zamówień:
                         </div>
                         <div class="col-6 col-lg-7">
-                            21
+                            <?php echo $zamowienia['ilosc'];?>
                         </div>
                         <div class="col-9 col-lg-6">
                             Łączna suma wydanych pieniędzy:
                         </div>
-                        <div class="col-3 col-lg-2">
+                        <div class="col-3 col-lg-2" id="money">
                             ***** zł
                         </div>
                         <div class="col-12 col-lg-4 text-center">
-                            Pokaż kwote <input type="checkbox" name="pokaz" id="">
+                            Pokaż kwote <input type="checkbox" name="pokaz" id="pokaz">
                         </div>
                     </div>
                     
@@ -73,5 +89,24 @@ if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
             </div>
         </div>
     </div>
+    <script>
+        const pokaz = document.getElementById('pokaz');
+        const money = document.getElementById('money');
+
+        pokaz.addEventListener('change',()=>{
+            if(pokaz.checked){
+                fetch('lacznaCena.php',{
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+                .then(res=> res.text())
+                .then(data => {
+                    money.innerHTML = data;
+                });
+            }else{
+                money.innerHTML ='***** zł';
+            }
+        })
+    </script>
 </body>
 </html>

@@ -11,7 +11,7 @@ $login = mysqli_real_escape_string($db, $login);
 $email = mysqli_real_escape_string($db, $email);
 
 $sql = "SELECT id_uzytkownika FROM uzytkownicy 
-        WHERE login = '$login' AND `e-mail` = '$email' AND haslo = '$haslo'";
+        WHERE login = '$login' AND `email` = '$email' AND haslo = '$haslo'";
 
 $wynik = mysqli_query($db, $sql);
 

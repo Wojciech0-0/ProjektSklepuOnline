@@ -19,7 +19,7 @@ if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
 
     <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
 
-        <div class=" col-8 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
+        <div class=" col-12 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
 
             <div class="pb-3 row text-center d-flex justify-content-center">
 

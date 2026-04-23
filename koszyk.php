@@ -59,6 +59,41 @@ $status = $_SESSION['zalogowany_id'];
                                 }else{
                                     echo '<div class="w-100 fs-1 text-white d-flex align-items-center justify-content-center" id="alert">Twój koszyk jest pusty</div>';
                                 }
+                            }else{
+                                $db = mysqli_connect('localhost', 'root', '', 'sklep');
+
+                                if (!empty($_SESSION['koszykgosc'])) {
+                                    // LECIMY PĘTLĄ PO KAŻDYM WPISIE W SESJI
+                                    foreach ($_SESSION['koszykgosc'] as $id_z_sesji) {
+                                        
+                                        // Pobieramy dane konkretnie tego jednego produktu
+                                        $sql = "SELECT id_produktu, nazwa, cena, zdjecie FROM produkty WHERE id_produktu = $id_z_sesji";
+                                        $wynik = mysqli_query($db, $sql);
+                                        
+                                        if ($produkt = mysqli_fetch_array($wynik)) {
+                                            // WYŚWIETLAMY (Teraz wyświetli się tyle razy, ile jest w tablicy)
+                                            echo '
+                                            <div style="width: 927px;" class="d-flex px-2 justify-content-center border-bottom border-3">
+                                                <div style="width: 200px;">
+                                                    <a href="produkt.php?id='.$produkt['id_produktu'].'">
+                                                        <img src="Zdjecia/'.$produkt['zdjecie'].'" style="height: 200px; width: 200px; border-right: solid white;">
+                                                    </a>
+                                                </div>
+                                                <div class="fs-2 text-white d-flex align-items-center justify-content-center" style="width: 200px; border-right: solid white;">'.$produkt['nazwa'].'</div>
+                                                <div class="fs-2 text-white d-flex align-items-center justify-content-center" style="width: 200px; border-right: solid white;">'.number_format($produkt['cena'], 2, '.', ' ').'zł</div>
+                                                <div class="d-flex align-items-center justify-content-center" style="width: 190px;">
+                                                    <a href="usunGosc.php?id_prod='.$produkt['id_produktu'].'">
+                                                        <button style="background-color: transparent; border: none;" class="powieksz">
+                                                            <img src="Ikony/kosz.png" height="50px">
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>';
+                                        }
+                                    }
+                                } else {
+                                    echo '<div class="w-100 fs-1 text-white d-flex align-items-center justify-content-center" id="alert">Twój koszyk jest pusty</div>';
+                                }
                             }
                             ?>
                       
@@ -77,7 +112,18 @@ $status = $_SESSION['zalogowany_id'];
                         $cena = mysqli_fetch_array($wynik2);
 
                         echo number_format((float)$cena['cena'],2, '.', ' ') . 'zł';
-                    } 
+                    } else {
+                        // Suma dla gościa z sesji
+                        $suma_gosc = 0;
+                        if (!empty($_SESSION['koszykgosc'])) {
+                            foreach ($_SESSION['koszykgosc'] as $id_sum) {
+                                $res = mysqli_query($db, "SELECT cena FROM produkty WHERE id_produktu = $id_sum");
+                                $item = mysqli_fetch_assoc($res);
+                                $suma_gosc += $item['cena'];
+                            }
+                        }
+                        echo number_format((float)$suma_gosc, 2, '.', ' ') . ' zł';
+                    }
                 ?>
                 </div>
                     <input type="submit" id="zakup" value="ZAPŁAĆ I ZAKUP" class="mb-2 text-light col-lg-5 col-11 fs-3 border-0 rounded-5 powieksz d-block" style="background-color: rgb(30, 232, 104);">
@@ -88,23 +134,39 @@ $status = $_SESSION['zalogowany_id'];
     <script>
         const kosz = document.getElementById('kosz');
         const zakup = document.getElementById('zakup');
-
-        zakup.addEventListener('click',()=>{
-            if(!document.getElementById('alert')){
-                if(confirm("Czy na pewno chcesz dokonać zakupu?")){
-                    fetch('zakup.php',{
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                    })
-                    .then(window.location.href = 'koszyk.php');
+        const status = '<?php echo $_SESSION['zalogowany_id'];?>'
+        
+        if(status != 'gosc'){
+            zakup.addEventListener('click',()=>{
+                if(!document.getElementById('alert')){
+                    if(confirm("Czy na pewno chcesz dokonać zakupu?")){
+                        fetch('zakup.php',{
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                        })
+                        .then(window.location.href = 'koszyk.php');
+                    }
+                }else{
+                    alert("Nie można kupić pustego koszyka!");
                 }
-            }else{
-                alert("Nie można kupić pustego koszyka!");
-            }
-            while(!document.getElementById('alert')){
-                window.location.href = 'koszyk.php';
-            }
-        })
+            })
+        }else{
+            zakup.addEventListener('click',()=>{
+                if(!document.getElementById('alert')){
+                    if(confirm("Czy na pewno chcesz dokonać zakupu?")){
+                        fetch('zakupgosc.php',{
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                        })
+                        .then(() => {
+                            window.location.href = 'koszyk.php';
+                        });
+                }else{
+                    alert("Nie można kupić pustego koszyka!");
+                }
+                }})
+        }
+        
     </script>
 </body>
 </html>

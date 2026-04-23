@@ -58,15 +58,28 @@ $status = $_SESSION['zalogowany_id'];
     <footer></footer>
     <script>
         const dodaj = document.getElementById('Dodaj');
+        const status = '<?php echo $_SESSION['zalogowany_id']; ?>';
 
-        dodaj.addEventListener('click',()=>{
-            fetch('dodajDoKoszyka.php',{
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'produkt=' + encodeURIComponent("<?php echo $id_produktu?>")
-                })
+        if(status != 'gosc'){
+                dodaj.addEventListener('click',()=>{
+                    fetch('dodajDoKoszyka.php',{
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: 'produkt=' + encodeURIComponent("<?php echo $id_produktu;?>")
+                        })
+                        .then(alert('Produkt dodany do koszyka!'));
+            })
+        }else{
+            dodaj.addEventListener('click',()=>{
+                fetch('dodajDoKoszykagosc.php',{
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'produkt=' + encodeURIComponent("<?php echo $id_produktu;?>")
+                    })
                 .then(alert('Produkt dodany do koszyka!'));
-        })
+            })
+        }
+        
     </script>
 </body>
 </html>

@@ -13,6 +13,7 @@ if (!isset($_SESSION['zalogowany_id'])) {
     // Jeśli nie ma go w schowku, wykopujemy go do logowania
     header("Location: logowanie.php");
     exit;
+    $status = $_SESSION['zalogowany_id'];
 }
 $db = mysqli_connect('localhost','root','','sklep');
 
@@ -55,5 +56,17 @@ $status = $_SESSION['zalogowany_id'];
         </div>
     </main>
     <footer></footer>
+    <script>
+        const dodaj = document.getElementById('Dodaj');
+
+        dodaj.addEventListener('click',()=>{
+            fetch('dodajDoKoszyka.php',{
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'produkt=' + encodeURIComponent("<?php echo $id_produktu?>")
+                })
+                .then(alert('Produkt dodany do koszyka!'));
+        })
+    </script>
 </body>
 </html>

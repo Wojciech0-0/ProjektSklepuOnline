@@ -33,16 +33,33 @@ $status = $_SESSION['zalogowany_id'];
                     <div class="col-2"></div>
                 </div>
 
-
+                
 
                 <div class="d-flex align-items-center justify-content-center col-9">
                     <div class="rounded-4 overflow-auto" style="background-color: rgba(211, 211, 211, 0.56);width: 100%; height: 200px;">
+                            <?php
+                $db = mysqli_connect('localhost','root','','sklep');
+
+                $sql = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie FROM koszyk JOIN produkty ON produkty.id_produktu = koszyk.id_produktu JOIN uzytkownicy ON uzytkownicy.id_uzytkownika = koszyk.id_uzytkownika WHERE koszyk.id_uzytkownika = $status";
+
+                $wynik= mysqli_query($db,$sql);
+
+                if(mysqli_num_rows($wynik) > 0){
+                    while($produkt = mysqli_fetch_array($wynik)){
+                        echo '
                         <div style="width: 927px;" class="d-flex px-2 justify-content-center border-bottom border-3">
-                            <div style="width: 200px;" class=""><a href="produkt.html"><img src="Zdjecia/Skaner.png" style="height: 200px; border-right: solid white;" alt=""></a></div>
-                            <div class="fs-2 text-white d-flex align-items-center justify-content-center" style="width: 200px; border-right: solid white;">Skaner</div>
-                            <div class="fs-2 text-white d-flex align-items-center justify-content-center" style="width: 200px; border-right: solid white;">450zł</div>
-                            <div class="d-flex align-items-center justify-content-center" style="width: 190px;"><button style="background-color: transparent; border: none;" class="powieksz"><img src="Ikony/kosz.png" height="50px" alt=""></button></div>
-                        </div>
+                        <div style="width: 200px;" class=""><a href="produkt.php?id='.$produkt['id_produktu'].'"><img src="Zdjecia/'.$produkt['zdjecie'].'" style="height: 200px; width: 200px; border-right: solid white;" alt=""></a></div>
+                                <div class="fs-2 text-white d-flex align-items-center justify-content-center" style="width: 200px; border-right: solid white;">'.$produkt['nazwa'].'</div>
+                                <div class="fs-2 text-white d-flex align-items-center justify-content-center" style="width: 200px; border-right: solid white;">'.$produkt['cena'].'zł</div>
+                                <div class="d-flex align-items-center justify-content-center" style="width: 190px;"><button style="background-color: transparent; border: none;" id="kosz" class="powieksz"><img src="Ikony/kosz.png" height="50px" alt=""></button></div>
+                                </div>';
+                    }
+                
+                }else{
+                    echo '<div class="w-100 fs-1 text-white d-flex align-items-center justify-content-center">Twój koszyk jest pusty</div>';
+                }
+                ?>
+                        
                         
                     </div>
                 </div>
@@ -51,7 +68,15 @@ $status = $_SESSION['zalogowany_id'];
 
                 <div class="align-items-center justify-content-center d-flex flex-column">
                     <hr class="d-block" style="color: white; width: 74%; margin-top: 20px; border: 2px solid rgb(255, 255, 255);">
-                  <div class="d-block fs-3 text-light col-8 text-end">Suma: 450zł</div>
+                  <div class="d-block fs-3 text-light col-8 text-end">Suma: <?php
+                  $sql2 = "SELECT SUM(produkty.cena) AS 'cena' FROM koszyk JOIN produkty ON produkty.id_produktu = koszyk.id_produktu JOIN uzytkownicy ON uzytkownicy.id_uzytkownika = koszyk.id_uzytkownika WHERE koszyk.id_uzytkownika = $status";
+
+                  $wynik2 = mysqli_query($db,$sql2);
+                    $cena = mysqli_fetch_array($wynik2);
+
+                    echo number_format($cena['cena'], 2, '.', ' ') . 'zł';
+                  
+                  ?></div>
                     <input type="submit" value="ZAPŁAĆ I ZAKUP" class="mb-2 text-light col-lg-5 col-11 fs-3 border-0 rounded-5 powieksz d-block" style="background-color: rgb(30, 232, 104);">
                 </div>
                 

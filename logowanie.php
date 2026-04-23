@@ -77,7 +77,7 @@ $uzytkownicy = mysqli_fetch_array($wynik);
                             .then(res => res.text())
                             .then(data => {
                                 if (data.startsWith("SUCCESS:")) {
-                                    window.location.href = 'main.php;
+                                    window.location.href = 'main.php';
                                 } else {
                                     alert.classList.remove('d-none');
                                     alert.innerHTML = data;

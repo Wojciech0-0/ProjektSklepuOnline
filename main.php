@@ -68,7 +68,7 @@ if (!isset($_SESSION['zalogowany_id'])) {
         <main class="homepage col-12 col-md-9 overflow-y-auto h-100 overflow-x-hidden" style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png);
     background-repeat: no-repeat;
     background-size: cover;">
-            <div class="Digga col-7 m-3 py-1 px-3 rounded-4 text-center text-light" style="background-color: rgba(169, 169, 169, 0.41);"><h1 id="Napis">Wszystkie przedmioty</h1></div>
+            <div class="Digga col-7 m-3 py-1 px-3 rounded-4 text-center text-light" style="background-color: rgba(169, 169, 169, 0.41); clear: both;"><h1 id="Napis">Wszystkie przedmioty</h1></div>
             <div id="produktyS" class="row"> 
             </div>
         </main>

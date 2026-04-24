@@ -90,3 +90,8 @@ header{
 .pokazany{
     display:block;
 }
+
+.inputAdmin{
+    background-color: transparent;
+    border: 0;
+}

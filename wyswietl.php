@@ -49,4 +49,10 @@ session_start();
                     </div>';
                 }
     }
+
+    if($_SESSION['zalogowany_id'] == 'admin'){
+        echo '<a href="dodajProdukt.php">
+            <div class="rounded-4 row d-flex flex-column m-4 col-12 col-sm-4 col-md-3 powieksz align-items-center" style="background-color: #d9d9d96a;"><img class="img-fluid h-100" src="Ikony/plus.png"></div>
+        </a>';
+    }
             ?>

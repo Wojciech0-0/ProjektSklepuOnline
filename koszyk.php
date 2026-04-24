@@ -144,12 +144,18 @@ $status = $_SESSION['zalogowany_id'];
                             method: 'POST',
                             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                         })
-                        .then(window.location.href = 'koszyk.php');
-                    }
-                }else{
+                        .then(res=> res.text())
+                            .then(data =>{
+                                if(data.startsWith("Za")){
+                                alert('Nie można kupić. Za mało produktu na stanie!')
+                            }else{
+                                alert('Zakup wykonano pomyślnie');
+                                window.location.href = 'koszyk.php';
+                            }
+                            })
+            }}else{
                     alert("Nie można kupić pustego koszyka!");
-                }
-            })
+                }});
         }else{
             zakup.addEventListener('click',()=>{
                 if(!document.getElementById('alert')){
@@ -158,13 +164,20 @@ $status = $_SESSION['zalogowany_id'];
                             method: 'POST',
                             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                         })
-                        .then(() => {
-                            window.location.href = 'koszyk.php';
-                        });
-                }else{
+                        .then(res=> res.text())
+                            .then(data =>{
+                                if(data.startsWith("Za")){
+                                alert('Nie można kupić. Za mało produktu na stanie!')
+                            }else{
+                                alert('Zakup wykonano pomyślnie');
+                                window.location.href = 'koszyk.php';
+                            }
+                            });
+        }}else{
                     alert("Nie można kupić pustego koszyka!");
                 }
-                }})
+            });
+                
         }
         
     </script>

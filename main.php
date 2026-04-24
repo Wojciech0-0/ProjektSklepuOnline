@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Logistyczna Furia</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
@@ -32,8 +32,8 @@ if (!isset($_SESSION['zalogowany_id'])) {
         </div>
         <input type="text" placeholder="Wyszukaj" class="px-3 wyszukiwanie rounded-5 border-0 col-8 col-md-3 h-100" id="wyszukiwarka">
         <div class="col-2 col-md-4">
-            <a href="konto.php"><img id="accicon" class="accicon col-6 col-sm-5 col-md-2 col-lg-1" src="Ikony/konto.png" alt="" style="float: right;"></a>
-            <a href="koszyk.php"><img src="Ikony/koszyk2.png" alt="" class="col-6 col-sm-5 col-md-2 col-lg-1" style="float: right;"></a>
+            <a href="konto.php"><img id="accicon" class="accicon col-6 col-sm-5 col-md-2 col-lg-1 powieksz" src="Ikony/konto.png" alt="" style="float: right;"></a>
+            <a href="koszyk.php"><img src="Ikony/koszyk2.png" alt="" class="col-6 col-sm-5 col-md-2 col-lg-1 powieksz" style="float: right;"></a>
             
         </div>
     </header>

@@ -28,7 +28,7 @@ if (!isset($_SESSION['zalogowany_id'])) {
 <body style="height: 100vh; display: flex; flex-direction: column; overflow-x: hidden;">
     <header class="row text-center h-">
         <div class="col-2 col-md-5">
-            <img class="menuicon col-12 col-sm-6 col-md-2 col-lg-1 powieksz" id="menu" src="Ikony/menu.png" alt="" style="float: left;">
+            <img class="menuicon col-6 col-sm-6 col-md-2 col-lg-1 powieksz" id="menu" src="Ikony/menu.png" alt="" style="float: left;"><img src="Zdjecia/Strona_logo.png" class="img-fluid col-6 col-lg-2" alt="">
         </div>
         <input type="text" placeholder="Wyszukaj" class="px-3 wyszukiwanie rounded-5 border-0 col-8 col-md-3 h-100" id="wyszukiwarka">
         <div class="col-2 col-md-4">

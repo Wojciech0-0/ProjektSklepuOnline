@@ -21,12 +21,12 @@ $status = $_SESSION['zalogowany_id'];
 
     <div class="justify-content-center align-items-center vh-100 d-flex">
 
-        <div class="col-8 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
+        <div class="col-12 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
 
             <div class="pb-3 row text-center d-flex justify-content-center align-items-center">
 
                 <div class="mb-5 d-flex rounded-5 col-11 align-items-center" style="background-color: rgba(104, 103, 103, 0.4);">
-                    <a href="main.php" class="col-2 col-sm-1 powieksz" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
+                    <a href="main.php" class="col-2 col-sm-1 powieksz" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a><img src="Zdjecia/Strona_logo.png" class="img-fluid col-1" alt="">
                     <div class="col-10 fs-1 text-light text-center">
                         Twój koszyk
                     </div>

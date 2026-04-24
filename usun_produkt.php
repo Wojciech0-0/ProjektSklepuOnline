@@ -2,7 +2,7 @@
 
 session_start();
 
-if($_SESSION['zalogowany_id' !='admin']){
+if($_SESSION['zalogowany_id'] !='admin'){
     header("Location: main.php");
     exit;
 }

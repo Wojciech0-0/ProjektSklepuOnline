@@ -28,7 +28,7 @@ $status = $_SESSION['zalogowany_id'];
 <body style="height: 100vh; display: flex; flex-direction: column;">
     <header class="row text-center h-">
         <div class="col-2 col-md-5">
-            <a href="main.php"><img id="menuicon" class="menuicon col-12 col-sm-6 col-md-2 col-lg-1 powieksz" src="Ikony/home.png" alt="" style="float: left;"></a>
+            <a href="main.php"><img id="menuicon" class="menuicon col-6 col-sm-6 col-md-2 col-lg-1 powieksz" src="Ikony/home.png" alt="" style="float: left;"></a><img src="Zdjecia/Strona_logo.png" class="img-fluid col-6 col-lg-2" alt="">
         </div>
         <div class="px-3  col-8 col-md-3"></div>
         <div class="col-2 col-md-4">

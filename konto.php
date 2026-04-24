@@ -21,7 +21,7 @@ $db = mysqli_connect('localhost','root','','sklep');
 ?>
 <body style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png); background-size: cover; background-repeat: no-repeat;">
     <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
-        <div class=" col-12 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
+        <div class="col-12 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
             <div class="pb-3 row text-center d-flex justify-content-center">
                 <div class="mb-5 d-flex rounded-5 col-11 align-items-center" style="background-color: rgba(104, 103, 103, 0.4);">
                     <a href="main.php" class="col-2 col-sm-1 powieksz" style="float: left;"><img class="img-fluid" src="Ikony/home.png" alt=""></a>
@@ -29,6 +29,8 @@ $db = mysqli_connect('localhost','root','','sklep');
                         <?php
                         if($status == 'gosc'){
                             echo 'Zaloguj się po więcej informacji.';
+                        }else if($status == 'admin'){
+                            echo "Cześć admin";
                         }else{
                             $sql = "SELECT uzytkownicy.login FROM uzytkownicy WHERE uzytkownicy.id_uzytkownika = $status";
 
@@ -44,7 +46,7 @@ $db = mysqli_connect('localhost','root','','sklep');
                 </div>
                 <?php
 
-                if($status != 'gosc'){
+                if($status != 'gosc' && $status != 'admin'){
                     echo '
                 
                 <div class="col-lg-12 my-2">
@@ -72,10 +74,20 @@ $db = mysqli_connect('localhost','root','','sklep');
                 <div class="col-lg-12 my-5">
                     <input type="submit" value="Usuń konto" name="usun" style=" color: white; background-color: red;" class="rounded-3 col-7 col-lg-4 powieksz" id="usun">
                 </div>';
-                }else{
+                }else if($status == 'gosc'){
                     echo ' <div class="col-lg-12 my-5">
                     
                     <input type="button" value="Zaloguj się" name="wyloguj" id="wyloguj" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz" style="background-color: lightgreen; color: white;">
+                </div>';
+                }else{
+                    echo ' <div class="col-lg-12 my-5">
+
+                    <div class="col-lg-12 my-2">
+                    
+                    <a href="zarzadajKontami.php"><input type="button" value="Zarządzaj kontami" name="zmienhaslo" id="" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz"></a>
+                </div>
+                    
+                    <input type="button" value="Wyloguj się" name="wyloguj" id="wyloguj" class="inpat border-1 rounded-3 col-7 col-lg-4 powieksz" style="background-color: lightgreen; color: white;">
                 </div>';
                 }
                 ?>

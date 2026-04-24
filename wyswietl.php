@@ -21,7 +21,7 @@ session_start();
                 $wyswietlenie = mysqli_query($id,$sqlpokaz);
 
                 while($d = mysqli_fetch_array($wyswietlenie)){
-                    echo '<div class="rounded-4 row d-flex flex-column m-4 col-6 col-sm-4 col-md-3 produkt powieksz align-items-center" style="background-color: #d9d9d96a;">
+                    echo '<div class="rounded-4 row d-flex flex-column m-4 col-10 col-sm-4 col-md-3 produkt powieksz align-items-center" style="background-color: #d9d9d96a;">
                         <a href="produkt.php?id='. $d['id_produktu'].'" class="text-decoration-none text-dark">
                             <div><img class="img-fluid" src="Zdjecia/'.$d['zdjecie'].'" style="height:211px;" alt=""></div>
                     <div class="podtekst rounded-4 p-3 col-12 text-center" style="background-color: #c2dcff7b;">' . $d['nazwa'] .'<br> <br>' . number_format($d['cena'], 2, '.', ' ') .'zł</div>
@@ -41,7 +41,7 @@ session_start();
                 $wyswietlenie = mysqli_query($id,$sqlpokaz);
 
                 while($d = mysqli_fetch_array($wyswietlenie)){
-                    echo '<div class="rounded-4 row d-flex flex-column m-4 col-12 col-sm-4 col-md-3 powieksz align-items-center produkt" style="background-color: #d9d9d96a;">
+                    echo '<div class="rounded-4 row d-flex flex-column m-4 col-10 col-sm-4 col-md-3 powieksz align-items-center produkt" style="background-color: #d9d9d96a;">
                         <a href="produkt.php?id='. $d['id_produktu'].'" class="text-decoration-none text-dark">
                             <div><img class="img-fluid" src="Zdjecia/'.$d['zdjecie'].'" style="height:211px;" alt=""></div>
                     <div class="podtekst rounded-4 p-3 col-12 text-center" style="background-color: #c2dcff7b;">' . $d['nazwa'] .'<br> <br>' . number_format($d['cena'], 2, '.', ' ') .'zł</div>
@@ -52,7 +52,7 @@ session_start();
 
     if($_SESSION['zalogowany_id'] == 'admin'){
         echo '<a href="dodajProdukt.php">
-            <div class="rounded-4 row d-flex flex-column m-4 col-12 col-sm-4 col-md-3 powieksz align-items-center" style="background-color: #d9d9d96a;"><img class="img-fluid h-100" src="Ikony/plus.png"></div>
+            <div class="rounded-4 row d-flex flex-column m-4 col-8 col-sm-4 col-md-3 powieksz align-items-center" style="background-color: #d9d9d96a;"><img class="img-fluid h-100" src="Ikony/plus.png"></div>
         </a>';
     }
             ?>

@@ -2,10 +2,10 @@
                     $db = mysqli_connect('localhost', 'root', '', 'sklep');
 
                         // 1. Pobieramy dane z POST
-                        $login = $_POST['login'] ?? '';
-                        $email = $_POST['email'] ?? '';
-                        $haslo1 = $_POST['haslo1'] ?? '';
-                        $haslo2 = $_POST['haslo2'] ?? '';
+                        $login = mysqli_real_escape_string($db,$_POST['login']) ?? '';
+                        $email = mysqli_real_escape_string($db, $_POST['email']) ?? '';
+                        $haslo1 = mysqli_real_escape_string($db,$_POST['haslo1']) ?? '';
+                        $haslo2 = mysqli_real_escape_string($db,$_POST['haslo2']) ?? '';
 
                         if($login != '' && $email != '' && $haslo1 != '' && $haslo2 != ''){
                             

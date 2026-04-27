@@ -9,7 +9,7 @@
 </head>
 <?php
 session_start();
-if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
+if (!isset($_SESSION['zalogowany_id']) || $_SESSION['zalogowany_id']=='gosc') {
     // Jeśli nie ma go w schowku, wykopujemy go do logowania
     header("Location: logowanie.php");
     exit;
@@ -31,7 +31,7 @@ if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
     $zamowienia = mysqli_fetch_assoc($wynik2);
 ?>
 <body style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png); background-size: cover; background-repeat: repeat-y;">
-    <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
+    <div class="container-fluid justify-content-center align-items-center min-vh-100 py-5 d-flex">
 
         <div class=" col-12 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
 

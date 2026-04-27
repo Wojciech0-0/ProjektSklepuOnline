@@ -38,7 +38,7 @@ if (!isset($_SESSION['zalogowany_id'])) {
         </div>
     </header>
     <div style="display: flex;" class="flex-wrap overflow-hidden">
-        <aside id="kategorie" class="kategorie col-12 h-100 col-md-3">
+        <aside id="kategorie" class="kategorie col-12 col-md-3 overflow-auto" style="height: 90vh">
             <div class="p-3">
                 <h2 class="kolorowy">Kategorie:</h2>
                 <ul class="lista">

@@ -18,7 +18,7 @@ $wynik = mysqli_query($db, $sql);
 $uzytkownicy = mysqli_fetch_array($wynik);
 ?>
 <body style="background-image: url(Gemini_Generated_Image_40c6r340c6r340c6.png); background-size: cover; background-repeat: no-repeat;">
-    <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
+    <div class="container-fluid justify-content-center align-items-center min-vh-100 d-flex py-5">
         
         <div class="row col-12 col-md-4 col-lg-3 rounded-5 shadow" style="background-color: rgba(169,169,169,0.4);">
             <div class="p-3 row text-center">

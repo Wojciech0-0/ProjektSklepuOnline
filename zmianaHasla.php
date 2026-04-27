@@ -17,7 +17,7 @@ if (!isset($_SESSION['zalogowany_id']) OR $_SESSION['zalogowany_id']=='gosc') {
     $status = $_SESSION['zalogowany_id'];
 ?>
 <body style="background-image: url(Gemini_Generated_Image_m2odv2m2odv2m2od.png); background-size: cover; background-repeat: no-repeat;">
-    <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
+    <div class="container-fluid justify-content-center align-items-center min-vh-100 py-5 d-flex">
         <div class=" col-12 col-md-8 col-lg-8 rounded-5 shadow-5" style="background-color: rgba(169,169,169,0.4);">
             <div class="pb-3 row text-center justify-content-center">
                 <div class="mb-5 d-flex rounded-5 col-11 align-items-center" style="background-color: rgba(104, 103, 103, 0.4);">

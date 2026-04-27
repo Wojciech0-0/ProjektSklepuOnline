@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body style="background-image: url(Gemini_Generated_Image_40c6r340c6r340c6.png); background-size: cover; background-repeat: no-repeat;">
-    <div class="container-fluid justify-content-center align-items-center vh-100 d-flex">
-        <div class="row col-6 col-md-4 col-lg-3 rounded-5 shadow" style="background-color: rgba(169,169,169,0.4);">
+    <div class="container-fluid justify-content-center align-items-center min-vh-100 py-5 d-flex">
+        <div class="row col-12 col-md-4 col-lg-3 rounded-5 shadow" style="background-color: rgba(169,169,169,0.4);">
             <div class="p-3 row text-center">
                 <div class="col-12 my-3 kolorowy">
                     <h2>ZAREJESTRUJ SIĘ</h2>

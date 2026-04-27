@@ -3,12 +3,10 @@ session_start();
 $db = mysqli_connect('localhost', 'root', '', 'sklep');
 
 // Krótszy zapis sprawdzania POST
-$login = $_POST['login'] ?? '';
-$email = $_POST['email'] ?? '';
-$haslo = $_POST['haslo'] ?? '';
+$login = mysqli_real_escape_string($db,$_POST['login']) ?? '';
+$email = mysqli_real_escape_string($db,$_POST['email']) ?? '';
+$haslo = mysqli_real_escape_string($db,$_POST['haslo']) ?? '';
 
-$login = mysqli_real_escape_string($db, $login);
-$email = mysqli_real_escape_string($db, $email);
 
 $sql = "SELECT id_uzytkownika FROM uzytkownicy 
         WHERE login = '$login' AND `email` = '$email' AND haslo = '$haslo'";

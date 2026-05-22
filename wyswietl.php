@@ -1,58 +1,56 @@
 <?php
-session_start();
 
-    $id = mysqli_connect('localhost','root','','sklep');
+    $db = mysqli_connect('localhost','root','','zegowskaszama');
 
-    $kategoria = $_POST['kategoria'] ?? 'wszystko';
-                $sort = $_POST['val'] ?? 'afabet';
-                $cenaOd = $_POST['cenaOd'] ?? 0;
-                $cenaDo = $_POST['cenaDo'] ?? 9999;
-                $status = $_SESSION['zalogowany_id'] ?? 'gosc';
-                $szukanie = $_POST['szukanie'] ?? '';
-    if($kategoria == 'wszystko'){
-                if($sort == "odNajmniejszej"){
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%' order by produkty.cena ASC";
-                }else if($sort == "odNajwiekszej"){
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.cena DESC";
-                }else{
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.nazwa ASC";
-                }
+    $kategoria = $_POST['kategoria'] ?? 'Wszystko';
+    $szukanie = $_POST['szukanie'] ?? '';
 
-                $wyswietlenie = mysqli_query($id,$sqlpokaz);
-
-                while($d = mysqli_fetch_array($wyswietlenie)){
-                    echo '<div class="rounded-4 row d-flex flex-column m-4 col-10 col-sm-4 col-md-3 produkt powieksz align-items-center" style="background-color: #d9d9d96a;">
-                        <a href="produkt.php?id='. $d['id_produktu'].'" class="text-decoration-none text-dark">
-                            <div><img class="img-fluid" src="Zdjecia/'.$d['zdjecie'].'" style="height:211px;" alt=""></div>
-                    <div class="podtekst rounded-4 p-3 col-12 text-center" style="background-color: #c2dcff7b;">' . $d['nazwa'] .'<br> <br>' . number_format($d['cena'], 2, '.', ' ') .'zł</div>
-                        </a>
-                    </div>';
-                }
+    if($kategoria!="Wszystko"){
+    $sql = "SELECT produkty.id, produkty.Nazwa, produkty.Cena, produkty.Kategoria, produkty.opis FROM produkty WHERE produkty.Kategoria = '$kategoria' AND produkty.Nazwa LIKE '%$szukanie%' ORDER BY produkty.Nazwa ASC";
     }else{
-
-                if($sort == "odNajmniejszej"){
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.kategoria = '$kategoria' AND produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.cena ASC";
-                }else if($sort == "odNajwiekszej"){
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.kategoria = '$kategoria' AND produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.cena DESC";
-                }else{
-                    $sqlpokaz = "SELECT produkty.id_produktu, produkty.nazwa, produkty.cena, produkty.zdjecie from produkty where produkty.kategoria = '$kategoria' AND produkty.cena >= $cenaOd AND produkty.cena <= $cenaDo AND produkty.nazwa LIKE '%$szukanie%'  order by produkty.nazwa ASC";
-                }
-
-                $wyswietlenie = mysqli_query($id,$sqlpokaz);
-
-                while($d = mysqli_fetch_array($wyswietlenie)){
-                    echo '<div class="rounded-4 row d-flex flex-column m-4 col-10 col-sm-4 col-md-3 powieksz align-items-center produkt" style="background-color: #d9d9d96a;">
-                        <a href="produkt.php?id='. $d['id_produktu'].'" class="text-decoration-none text-dark">
-                            <div><img class="img-fluid" src="Zdjecia/'.$d['zdjecie'].'" style="height:211px;" alt=""></div>
-                    <div class="podtekst rounded-4 p-3 col-12 text-center" style="background-color: #c2dcff7b;">' . $d['nazwa'] .'<br> <br>' . number_format($d['cena'], 2, '.', ' ') .'zł</div>
-                        </a>
-                    </div>';
-                }
+    $sql = "SELECT produkty.id, produkty.Nazwa, produkty.Cena, produkty.Kategoria, produkty.opis FROM produkty WHERE produkty.Nazwa LIKE '%$szukanie%' ORDER BY produkty.Nazwa ASC";
     }
 
-    if($_SESSION['zalogowany_id'] == 'admin'){
-        echo '<a href="dodajProdukt.php">
-            <div class="rounded-4 row d-flex flex-column m-4 col-8 col-sm-4 col-md-3 powieksz align-items-center" style="background-color: #d9d9d96a;"><img class="img-fluid h-100" src="Ikony/plus.png"></div>
-        </a>';
-    }
-            ?>
+
+
+            $wynik1 = mysqli_query($db, $sql);
+
+            while($d = mysqli_fetch_array($wynik1)){
+                if($d['Kategoria'] == "jedzenie"){
+                    $zdjecie = "jedzenie.png";
+                }else if($d['Kategoria'] == "przekąski"){
+                    $zdjecie = "przekaski.png";
+                }else if($d['Kategoria'] == "napoje"){
+                    $zdjecie = "napoje.png";
+                }
+                echo '<div class="col-xl-3 col-lg-4 col-md-6 mx-sm-0 mx-3'. $d['Kategoria'].'">
+
+                <div class="card border-0 shadow-sm rounded-4 h-100 product-card">
+
+                    <div class="product-image text-center p-4">
+                        <img src="'.$zdjecie.'" alt="" class="img-fluid">
+                    </div>
+
+                    <div class="card-body d-flex flex-column">
+
+                        <h4 class="fw-bold">
+                            '.$d['Nazwa'].'
+                        </h4>
+
+                        <p class="text-secondary flex-grow-1">
+                            '.$d['opis'].'
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+
+                            <span class="fs-3 fw-bold">
+                                '.$d['Cena'].' zł
+                            </span>
+
+                            <button class="btn add-btn d-flex p-1 justify-content-center align-content-center"> + </button>
+                        </div>
+                    </div>
+                </div>
+                </div>';
+            }
+?>
